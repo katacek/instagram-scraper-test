@@ -6,6 +6,7 @@ This actor tests 7 various inputs of instragram scraper and returns result inclu
 
 Example of input:
 
+```
 const input = 
         {
             general:        {
