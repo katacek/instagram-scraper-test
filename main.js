@@ -3,13 +3,14 @@ const { instagramTest } = require('./helper');
 
 Apify.main(async () => {
 
-        const input = {
-            "scraper": "jaroslavhejlek/instagram-scraper",
-            "build": {
-              "build": "beta"
-            }
-          }
-
+        // const input = {
+        //     "scraper": "jaroslavhejlek/instagram-scraper",
+        //     "build": {
+        //       "build": "beta"
+        //     }
+        //   }
+        const input = await Apify.getInput();
+        const slackToken = input.slackToken || process.env.slackToken;
         const scraper = input.scraper
         const build = input.build
 
@@ -347,7 +348,7 @@ Apify.main(async () => {
             }
         
         
-            await Apify.call('katerinahronik/slack-message', slackMessageActor)
+            //await Apify.call('katerinahronik/slack-message', slackMessageActor)
 
             console.log(`Slack notification sent.`);
             console.log(slackMessageActor.text)
