@@ -45,7 +45,7 @@ Apify.main(async () => {
 
         let buildText = ''
         
-        if(input.build) {
+        if(input.general.build) {
             buildText = '(build beta)'
         } else {
             buildText = '(main version)'
@@ -56,7 +56,7 @@ Apify.main(async () => {
             
                 const slackMessageActor = {
                 "token": slackToken,
-                "text": `At least one of the ${scraper} ${buildText} tests did not finish right, see the results: ${urlForKVS}`,
+                "text": `At least one of the ${input.general.scraper} ${buildText} tests did not finish right, see the results: ${urlForKVS}`,
                 "channel": "#public-actors-tests"
             }
         
