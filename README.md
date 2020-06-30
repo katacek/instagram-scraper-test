@@ -4,7 +4,8 @@ This actor tests 7 various inputs of instragram scraper and returns result inclu
 1) whether the number of scraped results is in line with the wanted number of results
 2) whether specific result values types corresponds with anticipatited values types
 
-Example of input:
+Example of output [here](https://api.apify.com/v2/key-value-stores/WQgn4nlKeoM6ng6A4/records/OUTPUT?disableRedirect=true)
+Example of input below:
 
 ```
 const input = 
