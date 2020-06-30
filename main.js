@@ -61,7 +61,7 @@ Apify.main(async () => {
             }
         
         
-            //await Apify.call('katerinahronik/slack-message', slackMessageActor)
+            await Apify.call('katerinahronik/slack-message', slackMessageActor)
 
             console.log(`Slack notification sent.`);
             console.log(slackMessageActor.text)
