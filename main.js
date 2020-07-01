@@ -60,7 +60,7 @@ Apify.main(async () => {
                 "channel": "#public-actors-tests"
             }
         
-        
+            console.log(slackMessageActor)
             await Apify.call('katerinahronik/slack-message', slackMessageActor)
 
             console.log(`Slack notification sent.`);
