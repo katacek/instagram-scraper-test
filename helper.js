@@ -72,8 +72,7 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
                     typeof testDatasetData.items[i][entry[0]] !== entry[1]
                 ) 
                 {
-                    testresults.typeOfResultValues = `Type of some output values differs from the expected one. Item number ${i}, 
-                    key: "${entry[0]}" is not type of ${entry[1]}`
+                    testresults.typeOfResultValues = `Type of some output values differs from the expected one. Item number ${i}, key: "${entry[0]}" is not type of ${entry[1]}`
                     // if at least one is not ok, quit inner cycle
                     everythingOk=false;
                     break;
