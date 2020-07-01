@@ -82,10 +82,7 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
                 }
             }
 
-            if (everythingOk)
-            {
-                console.log(`for ${i}nth object the results are ok`)
-            } else
+            if (!everythingOk)
             {
                 // if at least one is not ok, quit outer cycle
                 break;
