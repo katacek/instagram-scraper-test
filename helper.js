@@ -62,8 +62,6 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
         }
 
         // testing if specific output keys contains string / integer value 
-        testresults.typeOfResultValues = 'Type of all checked output values is in compliance with the expected one.'
-
         // iterate through dataset
         for(let i = 0; i<testNumberOfResults; i++){
             // iterate through testValueTypes
@@ -79,6 +77,8 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
                     // if at least one is not ok, quit inner cycle
                     everythingOk=false;
                     break;
+                } else {
+                    testresults.typeOfResultValues = 'Type of all checked output values is in compliance with the expected one.'
                 }
             }
 
