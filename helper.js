@@ -23,10 +23,12 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
         const test= await Apify.call(scraper, testInput, build)
 
         const datasetId = test.defaultDatasetId
+        const runId = test.id
 
-        const resultDatasetIdMessage=`Results saved in dataset with id ${datasetId}.`
+        const resultDatasetIdMessage=`Results saved in dataset with id ${datasetId}, run id ${runId}.`
         console.log(resultDatasetIdMessage)
         testresults.datasetId = datasetId
+        testresults.runId = runId
 
 
         const testDataset = await Apify.openDataset(datasetId)

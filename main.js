@@ -33,6 +33,7 @@ Apify.main(async () => {
 
         console.log('ALL TESTS DONE') 
         console.log(resultAll);
+
         let sendNotification = resultAll.some(x=>             
                 x.resultStatus !== 'Run was succesfull! All wanted results were downloaded.' ||
                 x.typeOfResultValues !== 'Type of all checked output values is in compliance with the expected one.'
@@ -42,6 +43,14 @@ Apify.main(async () => {
         await Apify.setValue('OUTPUT', resultAll);
         const urlForKVS = `https://api.apify.com/v2/key-value-stores/${Apify.getEnv().defaultKeyValueStoreId}/records/OUTPUT?disableRedirect=true`
         console.log(`See the results: ${urlForKVS}`)
+
+        const failedCombinations = [];
+        resultAll.forEach(x => {
+            if(x.resultStatus === 'Actor failed completely, no results downloaded.')
+            {
+                failedCombinations.push(x.combinationTested)
+            }
+        })
 
         let buildText = ''
         
@@ -56,11 +65,11 @@ Apify.main(async () => {
             
                 const slackMessageActor = {
                 "token": slackToken,
-                "text": `At least one of the ${input.general.scraper} ${buildText} tests did not finish right, see the results: ${urlForKVS}`,
+                "text": `At least one of the ${input.general.scraper} ${buildText} tests did not finish right, see the results: ${urlForKVS}. For following combinations, the test failed completely: ${failedCombinations}`,
                 "channel": "#public-actors-tests"
             }
         
-            await Apify.call('katerinahronik/slack-message', slackMessageActor)
+            //await Apify.call('katerinahronik/slack-message', slackMessageActor)
 
             console.log(`Slack notification sent.`);
             console.log(slackMessageActor.text)
