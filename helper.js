@@ -35,7 +35,7 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
 
         const runInfo = await Apify.call(scraper, testInput, { ...input.build, waitSecs: 0  });
         const runId = runInfo.id
-        const test = await Apify.utils.exports.waitForRunToFinish({ actorId: "shu8hvrXbJbY3Eb9W", runId: runId })
+        const test = await Apify.utils.waitForRunToFinish({ actorId: "shu8hvrXbJbY3Eb9W", runId: runId })
         //const test= await Apify.call(scraper, testInput, build)
 
         const datasetId = test.defaultDatasetId
