@@ -115,6 +115,7 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
         console.log('TEST failed')
         console.log(e)
         testresults.resultStatus = 'Actor failed completely, no results downloaded.'
+        testresults.runId = runId
         return testresults;
     }
   }
