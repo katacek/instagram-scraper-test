@@ -35,6 +35,7 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
 
         const runInfo = await Apify.call(scraper, testInput, { ...input.build, waitSecs: 0  });
         const runId = runInfo.id
+        testresults.runId = runId
         const test = await Apify.utils.waitForRunToFinish({ actorId: "shu8hvrXbJbY3Eb9W", runId: runId })
         //const test= await Apify.call(scraper, testInput, build)
 
@@ -44,7 +45,6 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
         const resultDatasetIdMessage=`Results saved in dataset with id ${datasetId}, run id ${runId}.`
         console.log(resultDatasetIdMessage)
         testresults.datasetId = datasetId
-        testresults.runId = runId
 
 
         const testDataset = await Apify.openDataset(datasetId)
