@@ -5,25 +5,41 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
         testresults = {};
         const scraper = input.scraper
         const build = input.build
-        const numberOfWantedResults = testInput.searchLimit * testInput.resultsLimit
-        
-        const inputMessage = `Checking for combination \"${testInput.searchType}\" & \"${testInput.resultsType}\". ${numberOfWantedResults} results wanted.`
-        console.log(inputMessage)
+               
         testresults.combinationTested = `${testInput.searchType} & ${testInput.resultsType}`
         if (testInput.directUrls){
             if(testInput.directUrls[0].includes("/p/")){
                 testresults.combinationTested = `direct urls - post & ${testInput.resultsType}`
             } else {
-                testresults.combinationTested = `direct urls - profile" & ${testInput.resultsType}`
+                testresults.combinationTested = `direct urls - profile & ${testInput.resultsType}`
             }
         }
+
+        let numberOfWantedResults = 0
+        if(testresults.combinationTested === 'user & posts' || testresults.combinationTested === 'place & posts' || testresults.combinationTested === 'hashtag & posts'){
+            numberOfWantedResults = testInput.searchLimit * testInput.resultsLimit;
+        } else if(testresults.combinationTested === 'user & details'){
+            numberOfWantedResults = testInput.searchLimit;
+        } else if(testresults.combinationTested === 'direct urls - profile & details'){
+            numberOfWantedResults = testInput.directUrls.length;
+        } else if(testresults.combinationTested === 'direct urls - profile & posts' || testresults.combinationTested === 'direct urls - post & comments'){
+            numberOfWantedResults = testInput.directUrls.length * testInput.resultsLimit;
+        } else {
+            numberOfWantedResults = 'not got it'
+            console.log('check number of results wanted')
+        }
+
         testresults.numberOfResultsWanted = numberOfWantedResults;
+        const inputMessage = `Checking for combination ${testresults.combinationTested}. ${numberOfWantedResults} results wanted.`
+        console.log(inputMessage)
 
-
-        const test= await Apify.call(scraper, testInput, build)
+        const runInfo = await Apify.call(scraper, testInput, { ...input.build, waitSecs: 0  });
+        const runId = runInfo.id
+        const test = await Apify.utils.exports.waitForRunToFinish({ actorId: "shu8hvrXbJbY3Eb9W", runId: runId })
+        //const test= await Apify.call(scraper, testInput, build)
 
         const datasetId = test.defaultDatasetId
-        const runId = test.id
+        //const runId = test.id
 
         const resultDatasetIdMessage=`Results saved in dataset with id ${datasetId}, run id ${runId}.`
         console.log(resultDatasetIdMessage)

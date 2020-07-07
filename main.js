@@ -6,8 +6,7 @@ Apify.main(async () => {
        
         const input = await Apify.getInput();
         const slackToken = input.slackToken || process.env.slackToken;
-
-      
+    
         const resultAll = [];
 
         for(testCondition of input.testsConditions)
