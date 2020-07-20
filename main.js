@@ -72,11 +72,11 @@ Apify.main(async () => {
             
                 const slackMessageActor = {
                 "token": slackToken,
-                "text": `At least one of the ${input.general.scraper} ${buildText} tests did not finish right, see the results: ${urlForKVS}. For following combinations, the test failed partially: ${combinationsToCheck}, for following it failed completely: ${failedCombinations}`,
+                "text": `For following combinations ${combinationsToCheck} / ${failedCombinations}, the ${input.general.scraper} ${buildText} test did not finish right, see the results: ${urlForKVS}.`,
                 "channel": "#public-actors-tests"
             }
         
-            await Apify.call('katerinahronik/slack-message', slackMessageActor)
+            //await Apify.call('katerinahronik/slack-message', slackMessageActor)
 
             console.log(`Slack notification sent.`);
             console.log(slackMessageActor.text)
