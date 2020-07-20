@@ -49,6 +49,7 @@ exports.instagramTest = async function (input, testInput, testValuesTypes) {
 
         const testDataset = await Apify.openDataset(datasetId)
         const testResults = await testDataset.getInfo()
+        await new Promise(r => setTimeout(r, 10000));
         const testNumberOfResults = testResults.itemCount
         testresults.numberOfResults = testNumberOfResults
 
