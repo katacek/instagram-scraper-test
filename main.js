@@ -72,7 +72,7 @@ Apify.main(async () => {
             
                 const slackMessageActor = {
                 "token": slackToken,
-                "text": `At least one of the ${input.general.scraper} ${buildText} tests did not finish right, see the results: ${urlForKVS}. For following combinations, the test failed partially: ${combinationsToCheck}, for following it failed completely ${failedCombinations}`,
+                "text": `At least one of the ${input.general.scraper} ${buildText} tests did not finish right, see the results: ${urlForKVS}. For following combinations, the test failed partially: ${combinationsToCheck}, for following it failed completely: ${failedCombinations}`,
                 "channel": "#public-actors-tests"
             }
         
